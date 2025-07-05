@@ -18,3 +18,17 @@ jobs:
 
       - name: Get golang version
         run: go test -cover ./...
+
+  tests:
+    name: Style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+
+      - name: Check formatting
+        run: test -z $(go fmt ./...)
