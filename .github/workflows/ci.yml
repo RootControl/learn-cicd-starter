@@ -16,5 +16,5 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
 
-      - name: Force Failure
-        run: (exit 1)
+      - name: Get golang version
+        run: go version
