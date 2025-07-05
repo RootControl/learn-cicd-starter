@@ -33,9 +33,25 @@ jobs:
       - name: Check formatting
         run: test -z $(go fmt ./...)
 
-      - name: Check Lint
-        run: go install honnef.co/go/tools/cmd/staticcheck@latest && staticcheck ./...
+      - name: Install staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
-      - name: Security check
-        run: go install github.com/securego/gosec/v2/cmd/gosec@latest && gosec ./...
+      - name: Run staticcheck
+        run: staticcheck ./...
 
+  Security:
+    name: Security
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+
+      - name: Run gosec
+        run: gosec ./...
