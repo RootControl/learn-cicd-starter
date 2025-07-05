@@ -35,3 +35,7 @@ jobs:
 
       - name: Check Lint
         run: go install honnef.co/go/tools/cmd/staticcheck@latest && staticcheck ./...
+
+      - name: Security check
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest && gosec ./...
+
