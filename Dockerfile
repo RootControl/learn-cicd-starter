@@ -1,7 +1,12 @@
-FROM --platform=linux/amd64 debian:stable-slim
+FROM alpine:latest
 
-RUN apt-get update && apt-get install -y ca-certificates
+RUN apk --no-cache add ca-certificates
 
-ADD notely /usr/bin/notely
+WORKDIR /app
 
-CMD ["notely"]
+COPY notely .
+COPY .env .
+
+RUN chmod +x ./notely
+
+CMD ["./notely"]
